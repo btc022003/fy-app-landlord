@@ -6,6 +6,7 @@
     inactive-color="#8F95B2"
     :placeholder="true"
     :safe-area-inset-bottom="true"
+    z-index="5"
   >
     <van-tabbar-item replace to="/home" icon="send-gift-o"
       >首页</van-tabbar-item

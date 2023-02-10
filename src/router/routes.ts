@@ -33,8 +33,8 @@ export default [
     path: "/login",
     component: () => import("../pages/Login.vue"),
   },
-  // {
-  //   path: "/page/search",
-  //   component: () => import("../pages/Search.vue"),
-  // },
+  {
+    path: "/page/emptyhouse",
+    component: () => import("../pages/EmptyHouse.vue"),
+  },
 ];

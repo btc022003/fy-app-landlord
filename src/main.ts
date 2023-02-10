@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import "./style.scss";
+import "vant/es/toast/style";
 import App from "./App.vue";
 // rem换算插件
 import "lib-flexible";
