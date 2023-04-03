@@ -37,5 +37,5 @@ declare namespace User {
     updatedAt: Date;
   };
 
-  type IRealInfo = { realName: string; idNum: string };
+  type IRealInfo = { realName: string; idNum: string; avatar: string };
 }

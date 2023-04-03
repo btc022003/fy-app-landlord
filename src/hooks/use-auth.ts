@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, onUnmounted } from "vue";
 import { showToast } from "vant";
 import { useRouter } from "vue-router";
 import { getCaptchaAPI, loginAPI, regAPI } from "../services/auth";
@@ -89,6 +89,9 @@ function useAuth() {
       });
     }
   };
+  onUnmounted(() => {
+    if (timer) clearInterval(timer);
+  });
   return {
     mobile,
     captcha,

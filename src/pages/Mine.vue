@@ -4,7 +4,11 @@
       <div class="header">
         <div class="header-top">
           <div class="touxiang">
-            <img src="../assets/images/Slice16.png" alt="" />
+            <img
+              style="width: 80px; height: 80px; border-radius: 50%"
+              :src="dalImg(info?.avatar!)"
+              alt=""
+            />
           </div>
           <div class="text">
             <p class="text-left">
@@ -78,6 +82,7 @@ import { ref } from "vue";
 import { loadUserInfoAPI } from "../services/auth";
 import { useUserInfoStore } from "../store/user-info-store";
 import { storeToRefs } from "pinia";
+import { dalImg } from "../utils/tools";
 
 const store = useUserInfoStore();
 

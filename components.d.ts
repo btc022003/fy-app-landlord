@@ -21,5 +21,6 @@ declare module '@vue/runtime-core' {
     VanSearch: typeof import('vant/es')['Search']
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
+    VanUploader: typeof import('vant/es')['Uploader']
   }
 }
