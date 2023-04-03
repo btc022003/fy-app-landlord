@@ -35,7 +35,7 @@
             <img src="../assets/images/1.png" alt="" />
             <p>我的账单</p>
           </div>
-          <div @click="$router.push('/tjfy')">
+          <div @click="$router.push('/mine/add_house')">
             <img src="../assets/images/2.png" alt="" />
             <p>添加房源</p>
           </div>

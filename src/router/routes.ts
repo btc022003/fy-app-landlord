@@ -10,7 +10,7 @@ export default [
       },
       {
         path: "/house",
-        component: () => import("../pages/House.vue"),
+        component: () => import("../pages/HouseList.vue"),
       },
       {
         path: "/msg",
@@ -44,5 +44,10 @@ export default [
   {
     path: "/mine/setting",
     component: () => import("../pages/Setting.vue"),
+  },
+  {
+    path: "/mine/add_house",
+    component: () => import("../pages/HouseAdd.vue"),
+    name: "AddHouse",
   },
 ];
