@@ -5,12 +5,19 @@
     <!-- 表单 -->
     <ul class="form">
       <li>
-        <p>用户名</p>
-        <input type="text" placeholder="请输入用户名" />
+        <p>手机号</p>
+        <input type="text" placeholder="请输入手机号" />
       </li>
       <li>
-        <p>密码</p>
-        <input type="text" placeholder="请输入密码" />
+        <p>验证码</p>
+        <div style="position: relative">
+          <input class="captcha" type="text" placeholder="验证码" />
+          <van-button
+            :disabled="false"
+            style="margin-top: 1px; margin-left: 4px; position: absolute"
+            >获取验证码</van-button
+          >
+        </div>
       </li>
     </ul>
     <router-link to="/" class="forget">忘记密码？</router-link>
@@ -19,7 +26,7 @@
     >
     <p class="register">
       <span>还没账号?</span
-      ><router-link to="/" class="to-register">快去注册</router-link>
+      ><router-link to="/reg" class="to-register">快去注册</router-link>
     </p>
   </div>
 </template>
@@ -29,9 +36,9 @@ import { useRouter } from "vue-router";
 import { showToast } from "vant";
 let router = useRouter();
 let submit = async () => {
-  localStorage.setItem("token", "xxx");
-  showToast("登录成功");
-  setTimeout(() => router.replace("/"), 1000);
+  // localStorage.setItem("token", "xxx");
+  // showToast("登录成功");
+  // setTimeout(() => router.replace("/"), 1000);
 };
 </script>
 <style scoped lang="scss">
@@ -55,6 +62,9 @@ let submit = async () => {
       text-indent: 1em;
       line-height: 45px;
       font-size: 18px;
+    }
+    .captcha {
+      width: 40%;
     }
   }
 }

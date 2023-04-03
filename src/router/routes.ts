@@ -34,6 +34,10 @@ export default [
     component: () => import("../pages/Login.vue"),
   },
   {
+    path: "/reg",
+    component: () => import("../pages/Reg.vue"),
+  },
+  {
     path: "/page/emptyhouse",
     component: () => import("../pages/EmptyHouse.vue"),
   },

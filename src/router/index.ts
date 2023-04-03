@@ -23,7 +23,11 @@ router.beforeEach((to, from, next) => {
     // 访问上级页面
     change("next");
   }
-  if (!localStorage.getItem("token") && to.path != "/login") {
+  if (
+    !sessionStorage.getItem("token") &&
+    to.path != "/login" &&
+    to.path != "/reg"
+  ) {
     next("/login");
   } else {
     next();
