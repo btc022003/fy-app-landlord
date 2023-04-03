@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { showToast } from "vant";
 import { useRouter } from "vue-router";
-import { getCaptchaAPI, regAPI } from "../services/auth";
+import { getCaptchaAPI, loginAPI, regAPI } from "../services/auth";
 
 function useAuth() {
   const router = useRouter();
@@ -61,10 +61,42 @@ function useAuth() {
       });
     }
   };
+
+  const login = async () => {
+    if (mobile.value && captcha.value) {
+      const res = await loginAPI({
+        mobile: mobile.value,
+        captcha: captcha.value,
+      });
+      if (res.success) {
+        showToast({
+          type: "success",
+          message: res.errorMessage,
+        });
+        sessionStorage.setItem("token", res.data);
+        clearInterval(timer);
+        setTimeout(() => router.replace("/"), 1000);
+      } else {
+        showToast({
+          type: "fail",
+          message: res.errorMessage,
+        });
+      }
+    } else {
+      showToast({
+        type: "fail",
+        message: "请输入手机号和验证码",
+      });
+    }
+  };
   return {
     mobile,
     captcha,
     loadCaptcha,
     reg,
+    login,
+    remainTime,
   };
 }
+
+export default useAuth;

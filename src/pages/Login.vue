@@ -6,22 +6,30 @@
     <ul class="form">
       <li>
         <p>手机号</p>
-        <input type="text" placeholder="请输入手机号" />
+        <input type="text" placeholder="请输入手机号" v-model="mobile" />
       </li>
       <li>
         <p>验证码</p>
         <div style="position: relative">
-          <input class="captcha" type="text" placeholder="验证码" />
+          <input
+            class="captcha"
+            type="text"
+            placeholder="验证码"
+            v-model="captcha"
+          />
           <van-button
-            :disabled="false"
+            :disabled="!(remainTime <= 0)"
             style="margin-top: 1px; margin-left: 4px; position: absolute"
-            >获取验证码</van-button
+            @click="loadCaptcha"
+            >{{
+              remainTime <= 0 ? "获取验证码" : `剩余${remainTime}秒`
+            }}</van-button
           >
         </div>
       </li>
     </ul>
     <router-link to="/" class="forget">忘记密码？</router-link>
-    <van-button type="primary" size="large" class="submit" @click="submit"
+    <van-button type="primary" size="large" class="submit" @click="login"
       >登录</van-button
     >
     <p class="register">
@@ -32,14 +40,9 @@
 </template>
 <script setup lang="ts">
 import TipText from "../components/TipText.vue";
-import { useRouter } from "vue-router";
-import { showToast } from "vant";
-let router = useRouter();
-let submit = async () => {
-  // localStorage.setItem("token", "xxx");
-  // showToast("登录成功");
-  // setTimeout(() => router.replace("/"), 1000);
-};
+import useAuth from "../hooks/use-auth";
+
+const { mobile, remainTime, captcha, login, loadCaptcha } = useAuth();
 </script>
 <style scoped lang="scss">
 .wrap {
