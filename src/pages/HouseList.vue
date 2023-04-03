@@ -40,16 +40,22 @@
       <div class="cut"></div>
     </header>
     <div class="content">
-      <div class="item">
+      <div class="item" v-for="item in houses" :key="item.id">
         <div class="left">
-          <img src="../assets/images/hh.png" alt="" />
+          <img
+            :src="dalImg(item.images.split(',')[0])"
+            alt=""
+            @click="toRooms(item.id!)"
+          />
         </div>
         <div class="info">
-          <div class="title">朗悦·公园道</div>
-          <div class="address">1号楼2单元302</div>
-          <div class="area">两室一厅</div>
-          <div class="status">合租：正在出租</div>
-          <div class="position">高新区|科学大道40号</div>
+          <div class="title">{{ item.dwelling }}</div>
+          <div class="address">{{ item.address }}</div>
+          <div class="area">{{ item.community }}</div>
+          <div class="status">
+            {{ item.isWhole ? "整租" : "合租" }} | <span>正在出租</span>
+          </div>
+          <div class="position">{{ item.region }}|{{ item.street }}</div>
         </div>
       </div>
     </div>
@@ -84,15 +90,31 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-let flag = ref<boolean>(false);
-let show = ref<boolean>(false);
-let num = ref<number>(0);
+import { loadHousesListAPI } from "../services/houses";
+import { dalImg } from "../utils/tools";
+const flag = ref<boolean>(false);
+const show = ref<boolean>(false);
+const num = ref<number>(0);
+const houses = ref<House.IHouse[]>();
 
 const router = useRouter();
 
 const addHouseHandle = () => {
   router.push({
     name: "AddHouse",
+  });
+};
+
+loadHousesListAPI().then((res) => {
+  houses.value = res.data;
+});
+
+const toRooms = (id: string) => {
+  router.push({
+    name: "HouseRooms",
+    params: {
+      id,
+    },
   });
 };
 </script>

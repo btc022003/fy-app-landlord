@@ -50,4 +50,9 @@ export default [
     component: () => import("../pages/HouseAdd.vue"),
     name: "AddHouse",
   },
+  {
+    path: "/mine/:id/rooms",
+    component: () => import("../pages/RoomList.vue"),
+    name: "HouseRooms",
+  },
 ];
