@@ -40,6 +40,8 @@ declare namespace House {
      * 用户信息
      */
     user?: User.IUser;
+
+    rooms?: IRoom[];
   };
 
   type IDevice = {

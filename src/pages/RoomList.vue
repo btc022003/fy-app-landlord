@@ -2,18 +2,34 @@
   <div class="rooms">
     <van-nav-bar title="房源详情" left-arrow @click-left="goBack" />
     <div class="info">
-      <h3>小区名字</h3>
-      <p>详细地址</p>
-      <p>是否整租</p>
+      <h3>{{ house?.dwelling }}</h3>
+      <p>{{ house?.address }}</p>
+      <p>{{ house?.isWhole ? "整租" : "合租" }}</p>
     </div>
-    <div class="item">
-      <img src="../assets/images/hh.png" alt="" />
-      <div class="detail">
-        <p>主卧-1200</p>
-        <p>价格:1300</p>
-        <p>描述</p>
+    <van-swipe-cell v-for="item in house?.rooms" :key="item.id">
+      <div class="item">
+        <img :src="dalImg(item.images.split(',')[0])" alt="" />
+        <div class="detail">
+          <p>{{ item.content }}</p>
+          <p>价格:{{ item.price }}</p>
+          <p>
+            屋内设施:<span class="device" v-for="d in item.roomAndDevices">{{
+              d.device.name
+            }}</span>
+          </p>
+          <van-button size="small" type="primary">{{
+            item.isFull ? "查看合同" : "生成合同"
+          }}</van-button>
+        </div>
       </div>
-    </div>
+      <template #right>
+        <div class="r-op">
+          <van-button square type="danger" text="删除" />
+          <van-button square type="primary" text="修改" />
+        </div>
+      </template>
+    </van-swipe-cell>
+
     <van-button
       icon="plus"
       type="primary"
@@ -24,10 +40,69 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { ref } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { loadHouseByIdAPI, loadHouseRoomByIdAPI } from "../services/houses";
+import { dalImg } from "../utils/tools";
 const router = useRouter();
+const { params } = useRoute();
+const house = ref<House.IHouse>();
 
 const goBack = () => router.back();
 
-const addRoomHandle = () => {};
+loadHouseByIdAPI(params.id as string).then((res) => {
+  // console.log(res);
+  house.value = res.data;
+});
+
+const addRoomHandle = () => {
+  router.push({
+    name: "HouseRoomsAdd",
+    params: {
+      id: params.id,
+    },
+  });
+};
 </script>
+<style scoped lang="scss">
+.info {
+  padding: 12px;
+  box-shadow: 1px 1px 1px gainsboro;
+  margin: 12px;
+  p {
+    margin: 4px 0;
+  }
+}
+.item {
+  display: flex;
+  padding: 12px;
+  box-shadow: 1px 1px 1px gainsboro;
+  margin: 12px;
+  img {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+  }
+  .detail {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+  }
+}
+.r-op {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  button {
+    height: 50%;
+  }
+}
+.device {
+  padding: 2px;
+  background-color: olivedrab;
+  color: white;
+  margin: 2px;
+}
+</style>
