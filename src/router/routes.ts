@@ -41,4 +41,8 @@ export default [
     path: "/page/emptyhouse",
     component: () => import("../pages/EmptyHouse.vue"),
   },
+  {
+    path: "/mine/setting",
+    component: () => import("../pages/Setting.vue"),
+  },
 ];

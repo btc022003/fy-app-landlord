@@ -1,4 +1,4 @@
-import { get, post } from "../utils/request";
+import { get, post, put } from "../utils/request";
 
 /**
  * 登录
@@ -33,6 +33,15 @@ export const regAPI = ({ mobile, captcha }: User.IUserLoginInfo) => {
     userName: mobile,
     pwd: captcha,
   });
+};
+
+/**
+ * 实名认证
+ * @param info
+ * @returns
+ */
+export const setInfoAPI = (info: User.IRealInfo) => {
+  return put("/api/v1/land_lords/ll_set_id_num", info);
 };
 
 /**

@@ -8,12 +8,12 @@
           </div>
           <div class="text">
             <p class="text-left">
-              周杰伦,<span class="text-right">你好!</span
+              {{ info?.realName }},<span class="text-right">你好!</span
               ><span class="green"
                 ><img src="../assets/images/green.png" alt=""
               /></span>
             </p>
-            <p class="emil">13618890338@163.com</p>
+            <p class="emil">{{ info?.userName }}</p>
           </div>
           <div class="bianji">
             <img src="../assets/images/bianji.png" alt="" />
@@ -46,7 +46,7 @@
             <img src="../assets/images/6.png" alt="" />
             <span class="txt">通知</span>
           </div>
-          <div class="w" @click="$router.push('/set')">
+          <div class="w" @click="$router.push('/mine/setting')">
             <img src="../assets/images/7.png" alt="" />
             <span class="txt">设置</span>
           </div>
@@ -73,7 +73,20 @@
     </div>
   </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+import { loadUserInfoAPI } from "../services/auth";
+import { useUserInfoStore } from "../store/user-info-store";
+import { storeToRefs } from "pinia";
+
+const store = useUserInfoStore();
+
+const { info } = storeToRefs(store);
+
+loadUserInfoAPI().then((res) => {
+  info.value = res.data;
+});
+</script>
 <style scoped>
 .warp {
   width: 100vw;

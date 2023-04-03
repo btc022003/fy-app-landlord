@@ -36,4 +36,6 @@ declare namespace User {
     createdAt: Date;
     updatedAt: Date;
   };
+
+  type IRealInfo = { realName: string; idNum: string };
 }
