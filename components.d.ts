@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     TitleText: typeof import('./src/components/TitleText.vue')['default']
     VanArea: typeof import('vant/es')['Area']
     VanButton: typeof import('vant/es')['Button']
+    VanCalendar: typeof import('vant/es')['Calendar']
     VanCell: typeof import('vant/es')['Cell']
     VanCellGroup: typeof import('vant/es')['CellGroup']
     VanCheckbox: typeof import('vant/es')['Checkbox']

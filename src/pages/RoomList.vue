@@ -17,15 +17,28 @@
               d.device.name
             }}</span>
           </p>
-          <van-button size="small" type="primary">{{
-            item.isFull ? "查看合同" : "生成合同"
-          }}</van-button>
+          <van-button
+            size="small"
+            type="primary"
+            @click="generateContractHandle(item.id)"
+            >{{ item.isFull ? "查看合同" : "生成合同" }}</van-button
+          >
         </div>
       </div>
       <template #right>
         <div class="r-op">
-          <van-button square type="danger" text="删除" />
-          <van-button square type="primary" text="修改" />
+          <van-button
+            square
+            type="danger"
+            text="删除"
+            @click="delRoomHandle(item.id)"
+          />
+          <van-button
+            square
+            type="primary"
+            text="修改"
+            @click="editRoomHandle(item.id)"
+          />
         </div>
       </template>
     </van-swipe-cell>
@@ -42,7 +55,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { loadHouseByIdAPI, loadHouseRoomByIdAPI } from "../services/houses";
+import {
+  loadHouseByIdAPI,
+  loadHouseRoomByIdAPI,
+  delRoomByIdAPI,
+  generateContractAPI,
+} from "../services/houses";
 import { dalImg } from "../utils/tools";
 const router = useRouter();
 const { params } = useRoute();
@@ -50,10 +68,12 @@ const house = ref<House.IHouse>();
 
 const goBack = () => router.back();
 
-loadHouseByIdAPI(params.id as string).then((res) => {
-  // console.log(res);
-  house.value = res.data;
-});
+const loadHouseInfo = () => {
+  loadHouseByIdAPI(params.id as string).then((res) => {
+    // console.log(res);
+    house.value = res.data;
+  });
+};
 
 const addRoomHandle = () => {
   router.push({
@@ -63,11 +83,41 @@ const addRoomHandle = () => {
     },
   });
 };
+
+const delRoomHandle = async (id: string) => {
+  await delRoomByIdAPI(id);
+  loadHouseInfo();
+};
+
+const editRoomHandle = async (id: string) => {
+  router.push({
+    name: "HouseRoomsAdd",
+    params: {
+      id: params.id,
+    },
+    query: {
+      room: id,
+    },
+  });
+};
+
+const generateContractHandle = (room: string) => {
+  // generateContractAPI()
+  router.push({
+    name: "GenerateContract",
+    params: {
+      id: room,
+    },
+  });
+};
+
+loadHouseInfo();
 </script>
 <style scoped lang="scss">
 .info {
   padding: 12px;
   box-shadow: 1px 1px 1px gainsboro;
+  background-color: beige;
   margin: 12px;
   p {
     margin: 4px 0;
@@ -100,9 +150,10 @@ const addRoomHandle = () => {
   }
 }
 .device {
-  padding: 2px;
+  padding: 4px;
   background-color: olivedrab;
   color: white;
-  margin: 2px;
+  margin: 4px;
+  display: inline-block;
 }
 </style>

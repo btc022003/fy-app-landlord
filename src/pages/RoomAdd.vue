@@ -54,14 +54,21 @@
 import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { post } from "../utils/request";
-import { addRoomInfoAPI, loadDevicesAPI } from "../services/houses";
+import {
+  addRoomInfoAPI,
+  loadDevicesAPI,
+  loadHouseRoomByIdAPI,
+  updateRoomInfoByIdAPI,
+} from "../services/houses";
+import { dalImg } from "../utils/tools";
 const router = useRouter();
-const { params } = useRoute();
+const { params, query } = useRoute();
 
 const content = ref("");
 const price = ref(0);
 const devices = ref([]);
 const allDevices = ref<House.IDevice[]>([]); // 设备
+// const room = ref({})
 
 const goBack = () => router.back();
 
@@ -79,6 +86,24 @@ const afterRead = (file: any) => {
     imgs.value.push(res.data);
   });
 };
+
+// 如果传递的又房间id，表示修改
+if (query.room) {
+  loadHouseRoomByIdAPI(query.room as string).then((res) => {
+    console.log(res.data);
+    content.value = res.data.content;
+    price.value = res.data.price;
+    devices.value = res.data.roomAndDevices.map(
+      (item: House.IRoomAndDevice) => item.roomDeviceId
+    );
+
+    imgs.value = res.data.images.split(",");
+    fileList.value = res.data.images.split(",").map((item: string) => ({
+      url: dalImg(item),
+    }));
+  });
+}
+
 const delFromFileList = (file: any, detail: any) => {
   // console.log(detail);
   fileList.value.splice(detail.index, 1);
@@ -86,13 +111,23 @@ const delFromFileList = (file: any, detail: any) => {
 };
 
 const onSubmit = async () => {
-  // 新增
-  await addRoomInfoAPI(params.id as string, {
-    content: content.value,
-    price: price.value * 1,
-    devices: devices.value.join(","),
-    images: imgs.value.join(","),
-  });
+  if (query.room) {
+    await updateRoomInfoByIdAPI(query.room as string, {
+      content: content.value,
+      price: price.value * 1,
+      devices: devices.value.join(","),
+      images: imgs.value.join(","),
+    });
+  } else {
+    // 新增
+    await addRoomInfoAPI(params.id as string, {
+      content: content.value,
+      price: price.value * 1,
+      devices: devices.value.join(","),
+      images: imgs.value.join(","),
+    });
+  }
+
   router.back();
 };
 </script>

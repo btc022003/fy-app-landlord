@@ -60,4 +60,9 @@ export default [
     component: () => import("../pages/RoomAdd.vue"),
     name: "HouseRoomsAdd",
   },
+  {
+    path: "/mine/house_room/g_contract/:id",
+    component: () => import("../pages/GenerateContract.vue"),
+    name: "GenerateContract",
+  },
 ];

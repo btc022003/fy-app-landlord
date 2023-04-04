@@ -70,6 +70,14 @@ export const updateRoomInfoByIdAPI = (roomId: string, data: House.IRoomInfo) =>
   put("/api/v1/land_lords/house_room/" + roomId, data);
 
 /**
+ * 删除房间信息
+ * @param roomId
+ * @returns
+ */
+export const delRoomByIdAPI = (roomId: string) =>
+  del("/api/v1/land_lords/del_room/" + roomId);
+
+/**
  * 获取房源详细信息
  * @param roomId
  * @returns
