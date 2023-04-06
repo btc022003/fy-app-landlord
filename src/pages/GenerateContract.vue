@@ -46,9 +46,22 @@
         />
       </van-cell-group>
       <van-calendar v-model:show="showStart" @confirm="onStartConfirm" />
-      <van-calendar v-model:show="showEnd" @confirm="onEndConfirm" />
+      <van-calendar
+        v-model:show="showEnd"
+        :max-date="selectMaxDate"
+        @confirm="onEndConfirm"
+      />
       <div style="margin: 16px">
-        <van-button round block type="primary" native-type="submit">
+        <van-button
+          round
+          block
+          type="danger"
+          @click="cancelContractHandle"
+          v-if="query.cid"
+        >
+          取消合同
+        </van-button>
+        <van-button round block type="primary" native-type="submit" v-else>
           提交
         </van-button>
       </div>
@@ -58,13 +71,17 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { formatDate } from "../utils/tools";
-import { generateContractAPI } from "../services/houses";
+import { formatDate, selectMaxDate } from "../utils/tools";
+import {
+  generateContractAPI,
+  loadContractById,
+  cancelContractAPI,
+} from "../services/houses";
 import { showToast } from "vant";
 const router = useRouter();
 const goBack = () => router.back();
 
-const { params } = useRoute();
+const { params, query } = useRoute();
 
 const name = ref("");
 const mobile = ref("");
@@ -76,17 +93,33 @@ const showStart = ref(false);
 const showEnd = ref(false);
 const onStartConfirm = (value: any) => {
   // console.log(value);
-
   showStart.value = false;
   startDate.value = formatDate(value);
 };
 
+if (query.cid) {
+  loadContractById(query.cid as string).then((res) => {
+    // console.log(res.data);
+    const contract: House.IRoomContract = res.data;
+    name.value = contract.user.realName;
+    mobile.value = contract.user.userName;
+    startDate.value = formatDate(contract.startTime);
+    endDate.value = formatDate(contract.endTime);
+    price.value = contract.price;
+    remarks.value = contract.remarks;
+  });
+}
+
 const onEndConfirm = (value: any) => {
   showEnd.value = false;
-  console.log(formatDate(value));
+  // console.log(formatDate(value));
   endDate.value = formatDate(value);
 };
 
+/**
+ * 生成合同
+ * @param v
+ */
 const onSubmit = async (v: any) => {
   // console.log(v);
   const res = await generateContractAPI({
@@ -107,5 +140,13 @@ const onSubmit = async (v: any) => {
       message: res.errorMessage,
     });
   }
+};
+
+/**
+ * 取消合同
+ */
+const cancelContractHandle = async () => {
+  await cancelContractAPI(query.cid as string);
+  router.back();
 };
 </script>

@@ -161,4 +161,46 @@ declare namespace House {
     landLordId: string;
     user: User.IUser;
   };
+
+  type IDateRoom = {
+    id: string;
+    dateTime: string;
+    remarks: string;
+    createdAt: string;
+    updatedAt: string;
+    userId: string;
+    roomId: string;
+    user: User.IUser;
+    room: IRoom;
+  };
+
+  type IRepair = {
+    id: string;
+    askImage: string;
+    remarks: string;
+    isReplyed: boolean;
+    replyContent?: any;
+    replyImage: string;
+    createdAt: string;
+    updatedAt: string;
+    userId: string;
+    roomId?: any;
+    roomContractId: string;
+    roomContract: IRoomContract;
+  };
+
+  type IComplain = {
+    id: string;
+    askImage: string;
+    remarks: string;
+    isReplyed: boolean;
+    replyContent?: string;
+    replyImage: string;
+    createdAt: string;
+    updatedAt: string;
+    userId: string;
+    roomContractId: string;
+    user: User.IUser;
+    contract: IRoomContract;
+  };
 }

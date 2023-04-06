@@ -24,5 +24,10 @@ export const dalImg = (url: string) => {
  * @param str
  * @returns
  */
-export const formatDate = (str: string | undefined) =>
+export const formatDate = (str: Date | string | undefined) =>
   dayjs(str).format("YYYY-MM-DD");
+
+/**
+ * 可以选择的最大日期
+ */
+export const selectMaxDate = dayjs(new Date()).add(3, "y").toDate();

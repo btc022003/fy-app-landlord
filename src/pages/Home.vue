@@ -13,45 +13,50 @@
         <div class="wel-wrap">
           <div class="user">
             <img src="../assets/head_img.png" alt="" />
-            <p><span>周杰伦</span>，你好</p>
+            <p>
+              <span>{{ info?.realName || "某某" }}</span
+              >，你好
+            </p>
           </div>
           <ul class="info-wrap">
             <li @click="$router.push('/page/emptyhouse')">
               <img src="../assets/search_title.png" alt="" />
-              <p>132</p>
+              <p>{{ homeData?.emptyRoomCount }}</p>
             </li>
             <li>
               <img src="../assets/tenant_title.png" alt="" />
-              <p><span>+</span>132<span>入住</span></p>
+              <p>
+                <span>+</span>{{ homeData?.fullRoomCount }}<span>入住</span>
+              </p>
             </li>
           </ul>
           <ul class="icons">
             <li>
-              <router-link to="/">
+              <router-link to="/mine/dates">
                 <img src="../assets/room_look.png" alt="" />
                 <p>预约看房</p>
               </router-link>
             </li>
             <li>
-              <router-link to="/">
+              <router-link to="/mine/repairs">
                 <img src="../assets/repair.png" alt="" />
                 <p>维修工单</p>
               </router-link>
             </li>
             <li>
-              <router-link to="/">
+              <router-link to="/mine/qa">
                 <img src="../assets/complaint.png" alt="" />
                 <p>投诉工单</p>
               </router-link>
             </li>
             <li>
-              <router-link to="/">
+              <router-link to="/house">
                 <img src="../assets/contract.png" alt="" />
                 <p>全部合同</p>
               </router-link>
             </li>
             <li>
-              <router-link to="/">
+              <router-link to="/house">
                 <img src="../assets/create_contract.png" alt="" />
                 <p>新建合同</p>
               </router-link>
@@ -62,112 +67,37 @@
         <div class="await-contract">
           <TitleText
             title="待确认合同"
-            sub-title="还有8份合同待确认，打个电话吧～"
-            @getMore="tip"
+            :sub-title="`还有${homeData?.needCheckedContract.length}份合同待确认，打个电话吧～`"
           />
         </div>
         <ul class="qrht">
-          <li>
-            <h3>李宇辉</h3>
-            <img class="dz" src="../assets/dz.png" alt="" /><span>盛和苑</span>
-            <p>1栋1单元102室</p>
-            <p>两人间 ￥1200/月</p>
-            <img class="dh" src="../assets/dh.png" alt="" />
-          </li>
-          <li>
-            <h3>赵宇辉</h3>
-            <img class="dz" src="../assets/dz.png" alt="" /><span>盛和苑</span>
-            <p>1栋1单元102室</p>
-            <p>两人间 ￥1200/月</p>
-            <img class="dh" src="../assets/dh.png" alt="" />
-          </li>
-          <li>
-            <h3>刘宇辉</h3>
-            <img class="dz" src="../assets/dz.png" alt="" /><span
-              >公园茂公园茂</span
-            >
-            <p>1栋1单元102室</p>
-            <p>两人间 ￥1200/月</p>
-            <img class="dh" src="../assets/dh.png" alt="" />
-          </li>
-          <li>
-            <h3>杜宇辉</h3>
-            <img class="dz" src="../assets/dz.png" alt="" /><span
-              >公园茂公园茂</span
-            >
-            <p>1栋1单元102室</p>
-            <p>两人间 ￥1200/月</p>
-            <img class="dh" src="../assets/dh.png" alt="" />
+          <li v-for="item in homeData?.needCheckedContract">
+            <h3>{{ item.user.realName }}</h3>
+            <img class="dz" src="../assets/dz.png" alt="" /><span>{{
+              item.room.content
+            }}</span>
+            <p>{{ item.room.house.address }}</p>
+            <p>￥{{ item.price }}/月</p>
+            <a :href="`tel:${item.user.userName}`"
+              ><img class="dh" src="../assets/dh.png" alt=""
+            /></a>
           </li>
         </ul>
-        <TitleText
-          title="待收租金"
-          sub-title="近期还有待收租金哦～"
-          @getMore="tip"
-        />
+        <TitleText title="待收租金" sub-title="近期还有待收租金哦～" />
         <ul class="dszj">
-          <li>
+          <li v-for="item in homeData?.needPayedContract">
             <div class="l">
-              <h3>孙宇辉<span class="oranges">3天</span></h3>
-              <p>1栋2单元302</p>
+              <h3>
+                {{ item.roomContract.user.realName
+                }}<span class="oranges">3天</span>
+              </h3>
+              <p>{{ item.roomContract.room.house.address }}</p>
               <img src="../assets/hdb.png" alt="" />
-              <span>朗悦·公园道1号·玺园</span>
-            </div>
-            <div class="r">
-              <p class="orange">押一付三</p>
-              <span>待收租金</span>
-              <span class="orange">￥1200</span>
-              <p>入住时间:2021年12月27日</p>
-            </div>
-            <div class="foot">
-              <p class="grn"></p>
-              <span>电费正常</span>
-              <p class="rd"></p>
-              <span>水费正常</span>
-            </div>
-          </li>
-          <li>
-            <div class="l">
-              <h3>孙宇辉<span class="orangess">10天</span></h3>
-              <p>1栋2单元302</p>
-              <img src="../assets/hdb.png" alt="" />
-              <span>朗悦·公园道1号·玺园</span>
-            </div>
-            <div class="r">
-              <p class="orange">押一付三</p>
-              <span>待收租金</span>
-              <span class="orange">￥1200</span>
-              <p>入住时间:2021年12月27日</p>
-            </div>
-            <div class="foot">
-              <p class="grn"></p>
-              <span>电费正常</span>
-              <p class="rd"></p>
-              <span>水费正常</span>
-            </div>
-          </li>
-          <li>
-            <div class="l">
-              <h3>孙宇辉<span class="greens">15天</span></h3>
-              <p>1栋2单元302</p>
-              <img src="../assets/hdb.png" alt="" />
-              <span>朗悦·公园道1号·玺园</span>
-            </div>
-            <div class="r">
-              <p class="orange">押一付三</p>
-              <span>待收租金</span>
-              <span class="orange">￥1200</span>
-              <p>入住时间:2021年12月27日</p>
-            </div>
-            <div class="foot">
-              <p class="grn"></p>
-              <span>电费正常</span>
-              <p class="rd"></p>
-              <span>水费正常</span>
+              <span>{{ item.roomContract.room.content }}</span>
             </div>
           </li>
         </ul>
-        <TitleText
+        <!-- <TitleText
           title="合同到期"
           sub-title="有13位租客合同即将到期，提醒续约吧～"
           @getMore="tip"
@@ -233,7 +163,7 @@
               <span>水费正常</span>
             </div>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
 
@@ -241,10 +171,34 @@
   </div>
 </template>
 <script setup lang="ts">
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { loadUserInfoAPI } from "../services/auth";
+import { useUserInfoStore } from "../store/user-info-store";
+import { homePageDataAPI } from "../services/houses";
 import TitleText from "../components/TitleText.vue";
+import { showToast } from "vant";
 let tip = () => {
-  alert("查看更多");
+  // alert("查看更多");
+  showToast({
+    type: "loading",
+    message: "稍等",
+  });
 };
+
+const store = useUserInfoStore();
+
+const { info } = storeToRefs(store);
+const homeData = ref<House.IHome>();
+
+loadUserInfoAPI().then((res) => {
+  info.value = res.data;
+});
+
+homePageDataAPI().then((res) => {
+  // console.log(res.data);
+  homeData.value = res.data;
+});
 </script>
 <style scoped lang="scss">
 .safe-head {

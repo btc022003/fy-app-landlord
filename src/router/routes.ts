@@ -65,4 +65,36 @@ export default [
     component: () => import("../pages/GenerateContract.vue"),
     name: "GenerateContract",
   },
+  {
+    path: "/mine/dates",
+    component: () => import("../pages/DateRoom.vue"),
+  },
+  {
+    path: "/mine/repairs",
+    component: () => import("../pages/Repairs.vue"),
+  },
+  {
+    path: "/mine/qa",
+    component: () => import("../pages/QA.vue"),
+  },
+  {
+    path: "/mine/wdzd",
+    component: () => import("../pages/Orders.vue"),
+  },
+  {
+    path: "/mine/sdcb",
+    component: () => import("../pages/Sdcb.vue"),
+  },
+  {
+    path: "/mine/about",
+    component: () => import("../pages/About.vue"),
+  },
+  {
+    path: "/mine/help",
+    component: () => import("../pages/Help.vue"),
+  },
+  {
+    path: "/mine/notice",
+    component: () => import("../pages/Notice.vue"),
+  },
 ];

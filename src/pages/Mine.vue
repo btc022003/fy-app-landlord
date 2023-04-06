@@ -27,11 +27,11 @@
 
       <div class="content">
         <div class="one">
-          <div @click="$router.push('/xzky')">
+          <div @click="$router.push('/mine/add_house')">
             <img src="../assets/images/4.png" alt="" />
             <p>新增客源</p>
           </div>
-          <div @click="$router.push('/wdzd')">
+          <div @click="$router.push('/mine/wdzd')">
             <img src="../assets/images/1.png" alt="" />
             <p>我的账单</p>
           </div>
@@ -39,14 +39,14 @@
             <img src="../assets/images/2.png" alt="" />
             <p>添加房源</p>
           </div>
-          <div @click="$router.push('/sdcb')">
+          <div @click="$router.push('/mine/sdcb')">
             <img src="../assets/images/3.png" alt="" />
             <p>手动抄表</p>
           </div>
         </div>
 
         <div class="two">
-          <div class="t" @click="$router.push('/notice')">
+          <div class="t" @click="$router.push('/mine/notice')">
             <img src="../assets/images/6.png" alt="" />
             <span class="txt">通知</span>
           </div>
@@ -56,16 +56,16 @@
           </div>
         </div>
         <div class="three">
-          <div class="h" @click="$router.push('/help')">
+          <div class="h" @click="$router.push('/mine/help')">
             <img src="../assets/images/5.png" alt="" />
             <span class="txt">帮助</span>
           </div>
-          <div class="e" @click="$router.push('/about')">
+          <div class="e" @click="$router.push('/mine/about')">
             <img src="../assets/images/8.png" alt="" />
             <span class="txt">关于</span>
           </div>
         </div>
-        <div class="login" @click="$router.replace('/login')">
+        <div class="login" @click="logOutHandle">
           <img src="../assets/images/10.png" alt="" />
           <span class="txtLogin">退出登录</span>
         </div>
@@ -79,18 +79,26 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 import { loadUserInfoAPI } from "../services/auth";
 import { useUserInfoStore } from "../store/user-info-store";
-import { storeToRefs } from "pinia";
 import { dalImg } from "../utils/tools";
 
 const store = useUserInfoStore();
 
 const { info } = storeToRefs(store);
 
+const router = useRouter();
+
 loadUserInfoAPI().then((res) => {
   info.value = res.data;
 });
+
+const logOutHandle = () => {
+  sessionStorage.removeItem("token");
+  router.push("/login");
+};
 </script>
 <style scoped>
 .warp {

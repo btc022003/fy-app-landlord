@@ -128,3 +128,28 @@ export const loadCurrentUserMessagesAPI = (userId: string) =>
  * @returns
  */
 export const loadRepairsInfoAPI = () => get("/api/v1/land_lords/repairs");
+
+/**
+ * 回复报修
+ * @param id
+ * @param content
+ * @param images
+ * @returns
+ */
+export const replyRepairsAPI = (id: string, content: string, images: string) =>
+  put("/api/v1/land_lords/replay_repairs/" + id, {
+    replyContent: content,
+    replyImage: images,
+  });
+
+/**
+ * 获取预约看房数据
+ * @returns
+ */
+export const loadDatesInfoAPI = () => get("/api/v1/land_lords/dates");
+
+/**
+ * 获取投诉数据
+ * @returns
+ */
+export const loadComplainInfoAPI = () => get("/api/v1/land_lords/complains");

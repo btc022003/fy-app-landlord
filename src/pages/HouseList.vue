@@ -8,7 +8,7 @@
         placeholder="请输入搜索关键词"
         class="search"
       />
-      <div class="selections">
+      <!-- <div class="selections">
         <div @click="show = !show">
           <p>房源状态</p>
           <img src="../assets/images/xx-k.png" alt="" />
@@ -21,7 +21,7 @@
           <p>位置</p>
           <img src="../assets/images/xx-k.png" alt="" />
         </div>
-      </div>
+      </div> -->
       <!-- <div class="options" v-show="show">
         <span :class="num == 1 ? 'active' : 'renttype'" @click="num = 1"
           >合租</span

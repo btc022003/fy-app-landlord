@@ -20,7 +20,7 @@
           <van-button
             size="small"
             type="primary"
-            @click="generateContractHandle(item.id)"
+            @click="generateContractHandle(item)"
             >{{ item.isFull ? "查看合同" : "生成合同" }}</van-button
           >
         </div>
@@ -101,12 +101,15 @@ const editRoomHandle = async (id: string) => {
   });
 };
 
-const generateContractHandle = (room: string) => {
+const generateContractHandle = (room: House.IRoom) => {
   // generateContractAPI()
   router.push({
     name: "GenerateContract",
     params: {
-      id: room,
+      id: room.id,
+    },
+    query: {
+      cid: room.isFull ? room.roomContracts[0].id : "",
     },
   });
 };
