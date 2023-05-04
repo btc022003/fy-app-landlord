@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-export const serverUrl = "http://localhost:3000";
+export const serverUrl = "http://120.26.71.58:3000";
 
 export const uploadActionUrl = serverUrl + "/api/v1/common/upload_file";
 

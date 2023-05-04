@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="hh">
     <header>
       <h1>房态</h1>
       <van-search
@@ -271,11 +271,11 @@ let num = ref<number>(0);
   padding-right: 24px;
   padding-left: 24px;
 }
-header {
+.hh>header {
   width: 375px;
   /* height: 220px; */
-  background: #4354e7;
-  border-radius: 0px 0px 40px 40px;
+  background: #0e47fe;
+  /* border-radius: 0px 0px 40px 40px; */
   opacity: 1;
   margin-top: 0;
   padding-top: 58px;
@@ -612,6 +612,13 @@ header input {
   font-size: 12px;
 }
 .box ul li:nth-child(3) {
+  border: none;
+}
+
+.content .item .left{
+  border-radius: 0;
+}
+.info{
   border: none;
 }
 </style>

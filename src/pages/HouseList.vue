@@ -129,8 +129,9 @@ const toRooms = (id: string) => {
 header {
   width: 100%;
   /* height: 220px; */
-  background: #4354e7;
-  border-radius: 0px 0px 40px 40px;
+  background: #0e47fe;
+  // background: #4354e7;
+  border-radius: 0px 0px 20px 20px;
   opacity: 1;
   margin-top: 0;
   padding-top: 58px;
@@ -272,11 +273,13 @@ header input {
     gap: 2px;
     margin: 12px 0;
     border-radius: 12px;
+    border: none;
     .left {
       width: 100px;
       overflow: hidden;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      // border-radius: 10px;
       img {
         height: 100%;
       }
@@ -287,20 +290,21 @@ header input {
       flex-direction: column;
       align-items: start;
       justify-content: space-around;
-      box-shadow: 1px 1px 0 gainsboro;
+      // box-shadow: 1px 1px 0 gainsboro;
 
-      padding: 8px;
+      padding: 0 8px;
       .title {
         font-size: 20px;
+        font-weight: bold;
       }
       .address,
       .area {
-        font-size: 10px;
-        color: #999999;
+        font-size: 12px;
+        color: #000;
       }
       .status {
-        font-size: 10px;
-        color: #ffcf7b;
+        font-size: 12px;
+        color: #ff9502;
       }
       .position {
         font-size: 12px;

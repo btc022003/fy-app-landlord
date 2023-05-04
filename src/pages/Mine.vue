@@ -5,7 +5,7 @@
         <div class="header-top">
           <div class="touxiang">
             <img
-              style="width: 80px; height: 80px; border-radius: 50%"
+              style="width: 100%; height: 100%; border-radius: 50%"
               :src="dalImg(info?.avatar!)"
               alt=""
             />
@@ -106,10 +106,10 @@ const logOutHandle = () => {
   height: 100vh;
 }
 .header {
-  height: 230px;
+  height: 210px;
   background-color: #0e47fe;
   padding-top: 44px;
-  background-image: url(../assets/images/tbbj.png);
+  /* background-image: url(../assets/images/tbbj.png); */
   background-size: 256px;
   background-repeat: no-repeat;
   background-position: 143px 29px;
@@ -120,24 +120,26 @@ const logOutHandle = () => {
   padding-top: 10px;
 }
 .touxiang {
-  width: 83px;
-  height: 83px;
+  width: 60px;
+  height: 60px;
 
   margin-right: 12px;
 }
 .text {
-  height: 83px;
-  width: 150px;
+  height: 60px;
+  width: 100px;
   color: #ffffffff;
   font-weight: 600;
 }
 .text-left {
   font-size: 20px;
-  padding-top: 21px;
+  padding-top: 10px;
   width: 150px;
+  font-weight: bold;
 }
 .text-right {
   font-size: 16px;
+  font-weight: normal;
 }
 .green {
   margin-left: 8px;
@@ -163,9 +165,22 @@ const logOutHandle = () => {
   justify-content: space-around;
   align-items: center;
   background-color: #fff;
-  padding-left: 34px;
-  padding-right: 34px;
-  border-radius: 40px 40px 0px 0px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 20px 20px 0px 0px;
+  text-align: center;
+  justify-content: space-between;
+}
+.one div{
+  width: 20%;
+}
+.one div img{
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+}
+.one div p{
+  line-height: 2;
 }
 .two,
 .three {

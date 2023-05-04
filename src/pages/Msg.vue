@@ -97,7 +97,7 @@
   margin-bottom: 11px;
 }
 .header {
-  background-color: #4354e7;
+  background-color: #0e47fe;
   height: 283px;
 }
 .header p {
@@ -144,7 +144,7 @@
 }
 .content {
   margin-top: -130px;
-  border-radius: 50px 50px 0px 0px;
+  border-radius: 20px 20px 0px 0px;
   z-index: 2000;
   background-color: #ffffff;
 }
@@ -157,7 +157,8 @@
 }
 ul {
   margin: 0 auto;
-  padding-top: 36px;
+  padding-top: 20px;
+  margin-top: 20px;
 }
 ul li {
   padding-left: 22px;

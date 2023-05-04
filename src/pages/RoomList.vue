@@ -13,9 +13,9 @@
           <p>{{ item.content }}</p>
           <p>价格:{{ item.price }}</p>
           <p>
-            屋内设施:<span class="device" v-for="d in item.roomAndDevices">{{
+           <b> 屋内设施:</b> <b><span class="device" v-for="d in item.roomAndDevices">{{
               d.device.name
-            }}</span>
+            }}</span></b>
           </p>
           <van-button
             size="small"
@@ -118,30 +118,78 @@ loadHouseInfo();
 </script>
 <style scoped lang="scss">
 .info {
-  padding: 12px;
-  box-shadow: 1px 1px 1px gainsboro;
-  background-color: beige;
-  margin: 12px;
+  padding: 20px;
+  // box-shadow: 1px 1px 1px gainsboro;
+  // background-color: ;
+  // margin: 12px;
+  color: #fff;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
+  background: #0e47fe url(../assets/7fa06c592566ac39f1cbd6ddb21142ffa94dd45159303-8SyHpq.png);
+  background-size: 100px;
+  background-position: right;
+  background-repeat: no-repeat;
+  h3{
+    font-size: 18px;
+  }
   p {
-    margin: 4px 0;
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  p:nth-child(2)~p{
+    border: 1px solid #fff;
+    border-radius: 5px;
+    float: left;
+    font-size: 12px;
+    padding: 2px 5px;
+    margin-right: 10px;
   }
 }
 .item {
   display: flex;
   padding: 12px;
-  box-shadow: 1px 1px 1px gainsboro;
+  // box-shadow: 1px 1px 1px gainsboro;
   margin: 12px;
   img {
-    width: 120px;
-    height: 120px;
-    border-radius: 8px;
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
   }
   .detail {
-    padding: 12px;
+    padding: 0px 0 0 12px;
     display: flex;
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
+    flex: 1;
+    p:nth-child(1){
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    p:nth-child(2){
+      font-size: 16px;
+      color: Red;
+      font-weight: bold;
+    }
+    p:nth-child(3){
+      display: flex;
+      flex-direction: column;
+      margin: 10px 0;
+      // flex-direction: column;
+      b{
+        font-weight: normal;
+
+      }
+      b:nth-child(1){
+        // width: 60px;
+        font-size: 14px;
+        line-height: 2;
+      }
+      b:nth-child(2){
+        // flex: 1;
+      }
+    }
   }
 }
 .r-op {
@@ -153,10 +201,23 @@ loadHouseInfo();
   }
 }
 .device {
-  padding: 4px;
-  background-color: olivedrab;
+  padding: 2px 4px;
+  // background-color: olivedrab;
   color: white;
-  margin: 4px;
+  margin: 4px 2px;
+  font-size: 10px;
   display: inline-block;
+  border: 1px solid olivedrab;
+  border-radius: 4px;
+  color: olivedrab;
+}
+
+
+button{
+  background: #0e47fe;
+}
+.rooms>button{
+  box-shadow: 0 0 10px #ccc;
+
 }
 </style>

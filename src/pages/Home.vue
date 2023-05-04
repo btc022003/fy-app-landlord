@@ -70,6 +70,7 @@
             :sub-title="`还有${homeData?.needCheckedContract.length}份合同待确认，打个电话吧～`"
           />
         </div>
+        
         <ul class="qrht">
           <li v-for="item in homeData?.needCheckedContract">
             <h3>{{ item.user.realName }}</h3>
@@ -216,10 +217,14 @@ homePageDataAPI().then((res) => {
   justify-content: space-around;
   font-size: 12px;
   color: #333;
-  margin: 20px 0;
+  margin: 40px 0;
   img {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+  }
+  p{
+    line-height: 2;
   }
 }
 .user {
@@ -241,15 +246,16 @@ homePageDataAPI().then((res) => {
 }
 .info-wrap {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-top: 20px;
   li {
-    width: 156px;
-    height: 100px;
+    width: 48%;
+    height: 80px;
     background-color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     background-size: 107px 107px;
     background-repeat: no-repeat;
+    background-position: 70px bottom;
     &:nth-child(1) {
       background-image: url(../assets/search_bg.png);
     }
@@ -261,17 +267,18 @@ homePageDataAPI().then((res) => {
       }
     }
     img {
-      margin-left: 55px;
+      margin-left: 10px;
       margin-top: 10px;
       width: 89px;
       height: 32px;
     }
     p {
       margin-right: 15px;
-      float: right;
+      // float: right;
+      margin-left: 10px;
       line-height: 30px;
       font-size: 28px;
-      color: #fdb207;
+      // color: #fdb207;
       font-weight: bolder;
       span {
         font-size: 14px;
@@ -282,6 +289,7 @@ homePageDataAPI().then((res) => {
 }
 .wrap {
   position: relative;
+  margin: 10px 0;
 }
 .head-bg {
   background: #0e47fe;
@@ -290,10 +298,10 @@ homePageDataAPI().then((res) => {
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 0 0 40px 40px;
+  // border-radius: 0 0 10px 10px;
 }
 .content {
-  padding: 0 24px;
+  padding: 0 10px;
   padding-top: 45px;
   position: relative;
   z-index: 2;
@@ -305,21 +313,22 @@ homePageDataAPI().then((res) => {
   padding-right: 0;
   padding-left: 0;
 }
+
 .qrht {
-  width: 323px;
+  // width: 323px;
   margin: 0 auto;
-  margin-bottom: 22px;
-  margin-top: 10px;
+  // margin-bottom: 22px;
+  // margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 .qrht li {
-  width: 130px;
-  height: 60px;
+  width: 48%;
+  // height: 60px;
   padding: 12px;
   position: relative;
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 0px 4px 9px 0px rgba(14, 71, 254, 0.09);
   opacity: 1;
   background-image: url(../assets/htbj.png);
@@ -327,6 +336,7 @@ homePageDataAPI().then((res) => {
   background-repeat: no-repeat;
   background-position: 0;
   margin: 10px 0;
+  box-sizing: border-box;
 }
 .qrht li .dz {
   width: 8px;
@@ -465,4 +475,13 @@ homePageDataAPI().then((res) => {
 .dszj li .foot .rd {
   background-color: #ff673d;
 }
+.content{
+  padding-top: 20px;
+}
+// .search .van-search{
+//   div{
+//     background: rgb(255 255 255 )!important;
+//     box-shadow: 0 0 10px #fff;
+//   }
+// }
 </style>
